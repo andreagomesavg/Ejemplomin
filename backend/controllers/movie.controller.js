@@ -8,7 +8,7 @@ movieCtrl.getMovies = async (req, res) => {
 }
 
 //Funcion que devuelve una pelicula dado un id
-movieCtrl.getMovies = async (req, res) => {
+movieCtrl.getMovie = async (req, res) => {
     const movie = await Movie.findById(req.params.id).then((data) =>
     {
         if(data!=null) res.status(200).json({status:data})
@@ -27,7 +27,7 @@ movieCtrl.addMovie = async (req, res) => {
 // put una peli
 movieCtrl.updateMovie = async (req, res) => {
     const movie= req.body;
-    await movie.findByIdAndUpdate(
+    await Movie.findByIdAndUpdate(
         req.params.id,
         {$set: movie},
         {new: true})
@@ -38,9 +38,19 @@ movieCtrl.updateMovie = async (req, res) => {
 }
 
 movieCtrl.deleteMovie = async (req, res) => {
-    await movie.findByIdAndDelete(req.params.id)
+    await Movie.findByIdAndDelete(req.params.id)
     .then((data) => {
         if(data)res.status(200).json({status: 'Movie succesfully deleted'})
     else res.status(404).json({status: 'Movie not found'})})
     .catch((err)=> res.status(400).json({status: err}));
 }
+
+
+movieCtrl.getGenres = async (req, res) => {
+    await Movie.find().distinct('genres')
+    .then((data) => {
+       res.status(200).json({status: data})})
+    .catch((err)=> res.status(400).json({status: err}));
+};
+
+module.exports = movieCtrl;
