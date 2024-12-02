@@ -10,7 +10,6 @@ const movieSchema = new Schema({
     imdb:{
         rating:{type: Number, required:true},
         votes:{type: Number, required:true}
-    }  
-}) ;
+    }}, {versionKey: false}) ;
 
 module.exports = mongoose.model('Movie', movieSchema, 'movies2425');
