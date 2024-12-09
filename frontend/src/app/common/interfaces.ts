@@ -1,6 +1,11 @@
-export interface ApiResponsesMovie {
+export interface ApiResponsesMovies {
     status: Movie[]
   }
+
+  export interface ApiResponsesMovie {
+    status: Movie
+  }
+  
   
   export interface Movie {
     imdb: Imdb

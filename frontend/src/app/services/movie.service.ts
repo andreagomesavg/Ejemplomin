@@ -1,4 +1,4 @@
-import { ApiResponsesMovie, Movie } from './../common/interfaces';
+import { ApiResponsesMovie, ApiResponsesMovies, Movie } from './../common/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -12,12 +12,12 @@ export class MovieService {
 
   constructor() {} 
 
-    getMovies():Observable<ApiResponsesMovie>{
-      return this.http.get<ApiResponsesMovie>(this.urlBase);
+    getMovies():Observable<ApiResponsesMovies>{
+      return this.http.get<ApiResponsesMovies>(this.urlBase);
     }
   
     getMovie(id:string):Observable<ApiResponsesMovie>{
-      return this.http.get<ApiResponsesMovie>(this.urlBase+'movie/'+id);
+      return this.http.get<ApiResponsesMovie>(this.urlBase+'/movie/'+id);
     }
 
     addMovie(movie: Movie): Observable<ApiResponseStatus>{
