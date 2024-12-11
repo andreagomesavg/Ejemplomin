@@ -6,22 +6,24 @@
             </div>
             @for (movie of movies; track movie._id) {
                 <div class="col-md-4 col-lg-3 col-sm-6 mt-2">
-                    <div class="card" routerLink="/movies/edit/{{movie._id}}">
-                        <div class="card-header">
+                    <div class="card" >
+                        <div class="card-header" routerLink="/movies/edit/{{movie._id}}">
                                 <h2 class="card-title">
                                     {{movie.title}}
                                 </h2>
-                                <p class="card-subtitle"> {{movie.director}} </p>
+                                <p class="card-subtitle" routerLink="/movies/edit/{{movie._id}}"> {{movie.director}} </p>
                             </div>
-                            <img [src]="movie.poster" alt="{{movie.title}}" class="card-img-top">
-                            <div class="card-body">
+                            <img [src]="movie.poster" alt="{{movie.title}}" class="card-img-top" routerLink="/movies/edit/{{movie._id}}">
+                            <div class="card-body" routerLink="/movies/edit/{{movie._id}}">
                                 <p class="card-text">{{movie.plot}}</p>
                             </div>
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between">
-                                    <p class="text-muted">{{movie.year}}</p>
+                                    <p class="text-muted" routerLink="/movies/edit/{{movie._id}}">{{movie.year}}</p>
+                                    <fa-icon [icon]="faTrashCan" (click)="deleteMovie(movie)" class="text-danger"></fa-icon>
                                 </div>
-                                <div class="d-flex">
+
+                                <div class="d-flex" routerLink="/movies/edit/{{movie._id}}">
                                     @for (genre of movie.genres; track genre) {
                                         <span class="badge rounded-pill text-bg-primary"> {{genre}} </span>
                                     }

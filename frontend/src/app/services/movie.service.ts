@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class MovieService {
   private readonly http :  HttpClient=inject(HttpClient);
-  private readonly urlBase = 'http://localhost:3000/api/v1/movies';
+  private readonly urlBase = 'http://localhost:3000/api/v1/movies/';
 
   constructor() {} 
 
@@ -17,7 +17,7 @@ export class MovieService {
     }
   
     getMovie(id:string):Observable<ApiResponsesMovie>{
-      return this.http.get<ApiResponsesMovie>(this.urlBase+'/movie/'+id);
+      return this.http.get<ApiResponsesMovie>(this.urlBase+'movie/'+id);
     }
 
     addMovie(movie: Movie): Observable<ApiResponseStatus>{
@@ -31,8 +31,16 @@ export class MovieService {
     deleteMovie(id: string): Observable<ApiResponseStatus>{
       return this.http.delete<ApiResponseStatus>(this.urlBase+id);
     }
+
+    getGenres():Observable<ApiResponseGenres>{
+      return this.http.get<ApiResponseGenres>(this.urlBase+'genres');
+    }
 }
 export interface ApiResponseStatus{
   status: string;
 
+}
+
+export interface ApiResponseGenres {
+  status: string[];
 }
